@@ -1,48 +1,57 @@
 //#include <stdio.h>
-//#include <stdlib.h>
-//int node[100000][3];
+//#include <map>
 //
-//int main(){
-//	int i,j;
-//	int n;
-//	int start;
+//using namespace std;
 //
-//	scanf("%d%d",&n,&start);
-//	for(i=0;i<n;i++){
-//		scanf("%d%d%d",&node[i][0],&node[i][1],&node[i][2]);
+//int main()
+//{	
+//	map<int, int> node;
+//	int input[100000][2];
+//
+//	int n, start;
+//	scanf("%d%d", &n, &start);
+//
+//	int addr;
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d", &addr);
+//		scanf("%d%d", &input[addr][0], &input[addr][1]);
 //	}
 //
-//	int temp;
-//	int pivot;
-//	int flag;
-//	int min;
+//	// Find the specific linked list and insert the node into MAP
+//	// Notice that given start addr maybe -1, means that the specific linked list unexists.
+//	if (start != -1)
+//	{
+//		for (;;)
+//		{
+//			node.insert(make_pair(input[start][0], start));
+//			if (input[start][1] == -1)break;
+//			start = input[start][1];
+//		}
 //
-//	for(i=0;i<n;i++){
-//		flag=0;
-//		min=node[i][1];
-//		for(j=i+1;j<n;j++){
-//			if(node[j][1]<min){
-//				flag=1;
-//				pivot=j;
-//				min=node[j][1];
+//		// Output
+//		map<int, int>::iterator currentNode = node.begin();
+//		printf("%d %05d\n", node.size(), currentNode->second);
+//		while (1)
+//		{
+//			printf("%05d %d", currentNode->second, currentNode->first);
+//			++currentNode;
+//
+//			if (currentNode == node.end())
+//			{
+//				printf(" -1\n");
+//				break;
 //			}
-//		}
-//		if(flag==1){
-//			temp=node[i][0];
-//			node[i][0]=node[pivot][0];
-//			node[pivot][0]=temp;
-//			temp=node[i][1];
-//			node[i][1]=node[pivot][1];
-//			node[pivot][1]=temp;
-//			node[i][2]=node[pivot][0];
+//			printf(" %05d\n", currentNode->second);
 //		}
 //	}
-//	node[n-1][2]=-1;
+//	else printf("0 -1\n");
 //
-//	printf("%d %05d\n",n,node[0][0]);
-//	for(i=0;i<n-1;i++)printf("%05d %d %05d\n",node[i][0],node[i][1],node[i+1][0]);
-//	printf("%05d %d -1\n",node[n-1][0],node[n-1][1]);
-//
-//	scanf("%d",&i);
 //	return 0;
 //}
+//
+////0	答案正确	1	308	15 / 15
+////1	答案正确	1	308	3 / 3
+////2	答案正确	1	180	3 / 3
+////3	答案正确	72	7424	3 / 3
+////4	答案正确	1	308	1 / 1
