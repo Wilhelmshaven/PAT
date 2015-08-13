@@ -1,44 +1,63 @@
-//#include <stdio.h>
+//#include <iostream>
+//#include <string>
+//#include <stack>
 //
-//int main(){
-//	int n,i,j,k,flag;
-//	char s[100][257],c,result[256];
+//using namespace std;
 //
-//	scanf("%d",&n);
+//int main(void)
+//{
+//	int n;
+//	cin >> n;
 //	getchar();
 //
-//	for(i=0;i<n;i++){
-//		for(j=1;;j++){
-//			c=getchar();
-//			if(c!='\n')s[i][j]=c;
-//			else{
-//				s[i][0]=j-1;
+//	std::string Jap[100];
+//	for (int i = 0; i < n; ++i)
+//	{
+//		getline(cin, Jap[i]);
+//	}
+//
+//	//Check
+//	stack<char> commom;
+//	bool flag = false;
+//	char tmp;
+//	int len = Jap[0].length();
+//
+//	for (int i = 0; i < len; ++i)
+//	{
+//		tmp = Jap[0][len - i - 1];
+//		int sublen;
+//
+//		for (int j = 1; j < n; ++j)
+//		{
+//			sublen = Jap[j].length();
+//			if (Jap[j][sublen - i - 1] != tmp)
+//			{
+//				flag = true;
 //				break;
 //			}
 //		}
+//
+//		if (flag)break;
+//		
+//		commom.push(tmp);
 //	}
 //
-//	k=0;
-//	flag=0;
-//	for(;;){
-//		for(i=1;i<n;i++){
-//			if(s[0][s[0][0]-k]!=s[i][s[i][0]-k] || s[0][s[0][0]-k]==' '){
-//				flag=1;
-//				break;
-//			}
-//		}
-//		if(flag==1)break;
-//		else{
-//			result[k]=s[0][s[0][0]-k];
-//			k++;
+//	//Output
+//	if (commom.empty())cout << "nai" << endl;
+//	else
+//	{
+//		while (!commom.empty())
+//		{
+//			cout << commom.top();
+//			commom.pop();
 //		}
 //	}
-//
-//	if(k!=0){
-//		for(i=k-1;i>0;i--)printf("%c",result[i]);
-//		if(i==0 && result[i]!=' ')printf("%c",result[0]);
-//	}
-//	else printf("nai\n");
 //
 //	return 0;
 //}
+//
+////0	答案正确	1	180	10 / 10
+////1	答案正确	1	308	1 / 1
+////2	答案正确	1	180	3 / 3
+////3	答案正确	2	308	3 / 3
+////4	答案正确	1	308	3 / 3
