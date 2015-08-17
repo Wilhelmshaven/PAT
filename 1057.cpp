@@ -58,30 +58,60 @@
 //
 //			// Also insert in the sorted list
 //			pivot = sortList.size();
-//			if (pivot == 0)sortList.push_back(value);
-//			else
+//			if (pivot == 0)
 //			{
-//				while (1)
-//				{
-//					if (sortList[pivot - 1] <= value)
-//					{
-//						iter = sortList.begin() + pivot - 1;
-//						sortList.insert(iter, value);
-//						break;
-//					}
-//					else
-//					{
-//						--pivot;
-//					}
-//
-//					if (pivot < 1)
-//					{
-//						iter = sortList.begin();
-//						sortList.insert(iter, value);
-//						break;
-//					}
-//				}
+//				sortList.push_back(value);
+//				continue;
 //			}
+//			
+//			pivot = (pivot + 1) / 2;
+//			int begin = 0, end = sortList.size();
+//			while (1)
+//			{							
+//				if (sortList[pivot] >= value)
+//				{
+//					begin = pivot + 1;
+//					pivot = (end - pivot) / 2;
+//				}
+//				else
+//				{
+//					end = pivot;
+//					pivot = pivot / 2;
+//				}
+//
+//				if (pivot == sortList.size() || pivot == 0)
+//				{
+//					iter = sortList.begin() + pivot;
+//					sortList.insert(iter, value);
+//					break;
+//				}
+//
+//				if (sortList[pivot] <= value && sortList[pivot + 1] >= value)
+//				{
+//					iter = sortList.begin() + pivot;
+//					sortList.insert(iter, value);
+//					break;
+//				}
+//				//这里现在是顺序查找，改成二分什么的应该就不超时了
+//				//if (sortList[pivot - 1] <= value)
+//				//{
+//				//	iter = sortList.begin() + pivot;
+//				//	sortList.insert(iter, value);
+//				//	break;
+//				//}
+//				//else
+//				//{
+//				//	--pivot;
+//				//}
+//
+//				//if (pivot < 1)
+//				//{
+//				//	iter = sortList.begin();
+//				//	sortList.insert(iter, value);
+//				//	break;
+//				//}
+//			}
+//			
 //		}
 //	}
 //

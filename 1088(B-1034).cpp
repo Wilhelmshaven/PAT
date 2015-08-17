@@ -1,6 +1,5 @@
 //#include <stdio.h>
 //#include <memory.h>
-//#include <cstdlib>
 //
 //struct ra
 //{
@@ -16,33 +15,36 @@
 //	else return a;
 //}
 //
-////约分
+////约分。点不过都应该是这个部分的问题了。
 //void fraction(ra &r)
 //{
-//	if (r.son == 0 || r.father == 0)return;
-//
-//	int flag = 0;
-//	if (r.son*r.father < 0)flag = 1;
-//	
-//	r.father = abs(r.father);
-//	r.son = abs(r.son);
-//
-//	r.integer = r.son / r.father;
-//	r.son = r.son%r.father;
-//
-//
-//	//求最大公约数
-//	if (r.son != 0)
+//	//传入的分数分母为零
+//	if (r.father == 0)
 //	{
+//		r.father = 1;
+//		r.son = 0;
+//	}
+//	//分母小于零，交换符号
+//	else if (r.father < 0)
+//	{
+//		r.father = -r.father;
+//		r.son = -r.son;
+//	}
+//
+//	//分子小于零
+//	if (r.son == 0)r.father = 1;
+//	else
+//	{
+//		//分子分母都不小于零了此时
+//
+//		// 求最大公约数并化简
 //		long long temp = gcd(r.son, r.father);
 //		r.son = r.son / temp;
 //		r.father = r.father / temp;
-//	}
 //
-//	if (flag != 0)
-//	{
-//		if (r.integer != 0)r.integer = -r.integer;
-//		else r.son = -r.son;
+//		// 处理假分数的情况
+//		r.integer = r.integer + r.son / r.father;
+//		r.son = r.son%r.father;
 //	}
 //}
 //
@@ -76,6 +78,18 @@
 //
 //void output(ra r)
 //{
+//	//先处理符号
+//	if (r.father < 0)
+//	{
+//		r.father = -r.father;
+//		r.son = -r.son;
+//	}
+//	if (r.son < 0 && r.integer != 0)
+//	{
+//		r.son = -r.son;
+//	}
+//
+//	//输出
 //	if (r.integer > 0)
 //	{
 //		if (r.son != 0)printf("%lld %lld/%lld", r.integer, r.son, r.father);
@@ -115,34 +129,36 @@
 //{
 //	ra a, b, aa, bb;
 //	ra result;
-//	
-//	while (1)
-//	{
-//		scanf("%lld/%lld %lld/%lld", &a.son, &a.father, &b.son, &b.father);
-//		a.integer = 0;
-//		b.integer = 0;
-//		aa = a;
-//		bb = b;
 //
-//		fraction(aa);
-//		fraction(bb);
+//	scanf("%lld/%lld %lld/%lld", &a.son, &a.father, &b.son, &b.father);
+//	a.integer = 0;
+//	b.integer = 0;
+//	aa = a;
+//	bb = b;
 //
-//		//应该是大整数样例没过了，longlong嘛，嗯好像也不是这个原因？
-//		memset(&result, 0, sizeof(result));
-//		add(a, b, result);
-//		print(aa, bb, '+', result);
+//	fraction(aa);
+//	fraction(bb);
 //
-//		memset(&result, 0, sizeof(result));
-//		minus(a, b, result);
-//		print(aa, bb, '-', result);
+//	memset(&result, 0, sizeof(result));
+//	add(a, b, result);
+//	print(aa, bb, '+', result);
 //
-//		memset(&result, 0, sizeof(result));
-//		multi(a, b, result);
-//		print(aa, bb, '*', result);
+//	memset(&result, 0, sizeof(result));
+//	minus(a, b, result);
+//	print(aa, bb, '-', result);
 //
-//		memset(&result, 0, sizeof(result));
-//		div(a, b, result);
-//		print(aa, bb, '/', result);
-//	}
+//	memset(&result, 0, sizeof(result));
+//	multi(a, b, result);
+//	print(aa, bb, '*', result);
+//
+//	memset(&result, 0, sizeof(result));
+//	div(a, b, result);
+//	print(aa, bb, '/', result);
+//
 //	return 0;
 //}
+//
+////0	答案正确	1	308	9 / 9
+////1	答案正确	1	308	5 / 5
+////2	答案正确	1	308	3 / 3
+////3	答案正确	1	308	3 / 3

@@ -1,7 +1,7 @@
 //#include <stdio.h>
-//#include <math.h>
 // 
-//int main(){
+//int main()
+//{
 //    long n;
 //    long ten=1;
 //    long count=0;
@@ -9,7 +9,8 @@
 //    
 //    scanf("%ld",&n);
 //    
-//	while(n/ten!=0){
+//	while(n/ten!=0)
+//	{
 //		right=n%ten;
 //		left=n/(ten*10);
 //		now=(n/ten)%10;

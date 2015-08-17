@@ -1,5 +1,5 @@
 //#include <stdio.h>
-//#include <memory.h>
+////#include <memory.h>
 //#include <stdlib.h>
 //
 //typedef struct PATScore
@@ -23,7 +23,7 @@
 //int main()
 //{
 //	PATScore ps[300];
-//	PATScore psFinal[30000];
+//	static PATScore psFinal[30000];
 //
 //	int n;
 //	scanf("%d", &n);
@@ -36,33 +36,36 @@
 //		scanf("%d", &k);
 //		//memset(ps, 0, sizeof(PATScore));
 //
-//		//input
-//		for (int j = 0; j < k; j++)
+//		if (k > 0)
 //		{
-//			scanf("%lld %d", &ps[j].regNum, &ps[j].score);
-//			ps[j].locNum = i + 1;          // Write location number
-//		}
-//
-//		//SORT
-//		qsort(ps, k, sizeof(PATScore), cmp);
-//
-//		//location RANK
-//		int rank = 1;
-//		ps[0].locRank = 1;
-//		psFinal[stuCount] = ps[0];
-//		stuCount++;
-//
-//		for (int j = 1; j < k; j++)
-//		{
-//			if (ps[j].score != ps[j - 1].score)
+//			//input
+//			for (int j = 0; j < k; j++)
 //			{
-//				rank++;
-//				if (rank < j + 1)rank = j + 1;
-//			}		
-//			ps[j].locRank = rank;
+//				scanf("%lld %d", &ps[j].regNum, &ps[j].score);
+//				ps[j].locNum = i + 1;          // Write location number
+//			}
 //
-//			psFinal[stuCount] = ps[j];
-//			stuCount++;
+//			//SORT
+//			qsort(ps, k, sizeof(PATScore), cmp);
+//
+//			//location RANK
+//			int rank = 1;
+//			ps[0].locRank = 1;
+//			psFinal[stuCount] = ps[0];
+//			++stuCount;
+//
+//			for (int j = 1; j < k; j++)
+//			{
+//				if (ps[j].score != ps[j - 1].score)
+//				{
+//					rank++;
+//					if (rank < j + 1)rank = j + 1;
+//				}
+//				ps[j].locRank = rank;
+//
+//				psFinal[stuCount] = ps[j];
+//				++stuCount;
+//			}
 //		}
 //	}
 //
@@ -70,20 +73,19 @@
 //
 //	//PRINT
 //	printf("%d\n", stuCount);
-//	int rank = 1;
-//	psFinal[0].finalRank = 1;
-//	printf("%lld %d %d %d\n", psFinal[0].regNum, psFinal[0].finalRank, psFinal[0].locNum, psFinal[0].locRank);
-//
-//	for (int i = 1; i < stuCount; i++)
+//	if (stuCount != 0)
 //	{
-//		if (psFinal[i].score != psFinal[i - 1].score)
-//		{
-//			rank++;
-//			if (rank < i + 1)rank = i + 1;
-//		}	
-//		psFinal[i].finalRank = rank;
+//		int rank = 1;
+//		psFinal[0].finalRank = 1;
+//		printf("%lld %d %d %d\n", psFinal[0].regNum, psFinal[0].finalRank, psFinal[0].locNum, psFinal[0].locRank);
 //
-//		printf("%lld %d %d %d\n", psFinal[i].regNum, psFinal[i].finalRank, psFinal[i].locNum, psFinal[i].locRank);
+//		for (int i = 1; i < stuCount; i++)
+//		{
+//			if (psFinal[i].score != psFinal[i - 1].score)rank = i + 1;
+//			psFinal[i].finalRank = rank;
+//
+//			printf("%lld %d %d %d\n", psFinal[i].regNum, psFinal[i].finalRank, psFinal[i].locNum, psFinal[i].locRank);
+//		}
 //	}
 //
 //	return 0;
