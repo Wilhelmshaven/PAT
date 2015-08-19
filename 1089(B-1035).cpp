@@ -64,7 +64,6 @@
 //
 //	//Begin sorting
 //	int pivot;
-//	vector<int>::iterator iter;
 //	for (int i = 1;;++i)
 //	{
 //		//Insertion sort
