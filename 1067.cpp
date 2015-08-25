@@ -1,56 +1,60 @@
 //#include <stdio.h>
+//#include <vector>
 //
-//int main(){
-//	int n, i, j, pivot;
-//	int num[100005];
-//	int temp;
-//	int count = 0;
-//	int flag = 1;
+//using namespace std;
 //
+//int myFind(vector<int> v, int k,int n)
+//{
+//	for (int i = k; i < n; ++i)
+//	{
+//		if (v[i] != i)return i;
+//	}
+//	return 0;
+//}
+//
+//int main()
+//{
+//	int n;
 //	scanf("%d", &n);
-//	for (i = 0; i < n; i++)
+//
+//	vector<int> seq;
+//	int tmp;
+//	for (int i = 0; i < n; ++i)
 //	{
-//		scanf("%d", &num[i]);
-//		if (num[i] == 0)pivot = i;
+//		scanf("%d", &tmp);
+//		seq.push_back(tmp);
 //	}
 //
-//	for (i = 0; i < n; i++)
+//	int cnt = 0;
+//	size_t size = seq.size();
+//
+//	int flag = myFind(seq, 1, n);
+//	while (flag)
 //	{
-//		flag = 1;
-//		if (pivot == 0)
+//		if (seq[0] == 0)
 //		{
-//			//If num[0]==0, swap with the nearest element.
-//			for (j = 1; j < n; j++)
-//			{
-//				if (num[j] != j){
-//					num[0] = num[j];
-//					num[j] = 0;
-//					pivot = j;
-//					count++;
-//					flag = 0;
-//					break;
-//				}
-//			}
+//			seq[0] = seq[flag];
+//			seq[flag] = 0;
+//			++cnt;
 //		}
-//		else
+//
+//		while (seq[0] != 0)
 //		{
-//			//If num[0]!=0, swap num[pivot](0) with pivot.
-//			for (j = 0; j < n; j++){
-//				if (num[j] == pivot)
-//				{
-//					num[pivot] = pivot;
-//					num[j] = 0;
-//					pivot = j;
-//					count++;
-//					flag = 0;
-//					break;
-//				}
-//			}
+//			swap(seq[0], seq[seq[0]]);
+//			++cnt;
 //		}
-//		if (flag == 1)break;
+//
+//		flag = myFind(seq, flag, n);
 //	}
 //
-//	printf("%d", count);
+//	printf("%d", cnt);
 //
 //	return 0;
 //}
+//
+////0	答案正确	1	252	15 / 15
+////1	运行超时			0 / 3
+////2	运行超时			0 / 3
+////3	答案正确	1	308	2 / 2
+////4	答案正确	1	256	1 / 1
+////5	答案正确	1	180	1 / 1

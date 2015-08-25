@@ -1,50 +1,106 @@
-//#include <stdio.h>
-//char rnum[17];
-//char num[17];
-//int rnumber;
-//int number;
+//#include <iostream>
+//#include <cmath>
+//#include <stack>
 //
-//int isPrime(int d){
-//	int i;
+//using namespace std;
 //
-//	for()
+//int prime[9593];
+//
+//void printPrime()
+//{
+//	prime[0] = 2;
+//	prime[1] = 3;
+//
+//	int pivot = 2;
+//	bool flag = true;
+//	for (int i = 6; i < 100010; i = i + 6)
+//	{
+//		for (int j = 0; j < pivot; ++j)
+//		{
+//			flag = true;
+//			if ((i - 1) % prime[j] == 0)
+//			{
+//				flag = false;
+//				break;
+//			}
+//		}
+//		if (flag)
+//		{
+//			prime[pivot] = i - 1;
+//			++pivot;
+//		}
+//
+//		for (int j = 0; j < pivot; ++j)
+//		{
+//			flag = true;
+//			if ((i + 1) % prime[j] == 0)
+//			{
+//				flag = false;
+//				break;
+//			}
+//		}
+//		if (flag)
+//		{
+//			prime[pivot] = i + 1;
+//			++pivot;
+//		}
+//	}
 //}
 //
-//int main(){
-//	int n,d;
-//	int i;
+//bool isPrime(int n)
+//{
+//	if (n == 1)return false;
 //
-//	int length;
-//	int flag;
+//	for (int i = 0; i < 9593; ++i)
+//	{
+//		if (prime[i] >= n)break;
+//		if (n%prime[i] == 0)return false;
+//	}
+//	return true;
+//}
 //
+//int main()
+//{
+//	printPrime();
 //
-//	for(;;){
-//		scanf("%d",&n);
-//		if(n<0)break;
-//		else scanf("%d",&d);
+//	int n, radix, powCnt;
+//	stack<int> reverse;
+//	while (1)
+//	{
+//		cin >> n;
+//		if (n < 0)break;
 //
-//		if(d>2){
-//			for(i=0;;i++){
-//				if(n==0){
-//					length=i;
-//					break;
-//				}
-//				rnum[i]=n%d;
-//				n=n/d;
-//			}
+//		cin >> radix;
+//		//N不是质数
+//		if (!isPrime(n))
+//		{
+//			cout << "No" << endl;
+//			continue;
+//		}
 //
-//			for(i=length-1;i>=0;i--){
-//				num[length-i-1]=rnum[i];
-//			}
+//		//反转		
+//		while (n > 0)
+//		{
+//			reverse.push(n%radix);
+//			n = n / radix;
+//		}
+//		
+//		powCnt = 0;
+//		while (!reverse.empty())
+//		{
+//			n = n + reverse.top() * pow(radix, powCnt);
+//			reverse.pop();
+//			++powCnt;
+//		}
 //
-//			flag=isPrime(d);
-//
-//		}else flag==1;
-//
-//		if(flag==1)printf("Yes\n");
-//		else printf("No\n");
-//
+//		if (isPrime(n))cout << "Yes" << endl;
+//		else cout << "No" << endl;
 //	}
 //
 //	return 0;
 //}
+//
+////0	答案正确	151	392	12 / 12
+////1	答案正确	151	316	2 / 2
+////2	答案正确	151	320	4 / 4
+////3	答案正确	151	312	2 / 2

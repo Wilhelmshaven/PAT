@@ -6,131 +6,88 @@
 //
 //using namespace std;
 //
-//void preOrder(vector<int> *v, int node, int n)
+//typedef struct node
 //{
-//	(*v).push_back(node);
-//	if (2 * node < n)preOrder(v, 2 * node, n);
-//	if (2 * node + 1 < n)preOrder(v, 2 * node + 1, n);
+//	int lChild;
+//	int rChild;
+//};
+//
+//vector<node> myTree;
+//vector<int> preOrder, inOrder, postOrder;
+//
+//int buildTree(vector<int>::iterator pre, vector<int>::iterator in, int n)
+//{
+//	if (n <= 0)return -1;
+//	int root = pre[0];
+//
+//	int pivot;
+//	for (int i = 0; i < n; ++i)
+//	{
+//		if (in[i] == root)
+//		{
+//			pivot = i;
+//			break;
+//		}
+//	}
+//
+//	myTree[root].lChild = buildTree(pre + 1, in, pivot);
+//	myTree[root].rChild = buildTree(pre + pivot + 1, in + pivot + 1, n - pivot - 1);
+//			
+//	return root;
 //}
 //
-//void inOrder(vector<int> *v, int node, int n)
+//void printPostOrder(int root)
 //{
-//	if (2 * node < n)inOrder(v, 2 * node, n);
-//	(*v).push_back(node);
-//	if (2 * node + 1 < n)inOrder(v, 2 * node + 1, n);
-//}
+//	postOrder.push_back(root);
 //
-//void postOrder(vector<int> *v, int node, int n)
-//{
-//	if (2 * node < n)postOrder(v, 2 * node, n);	
-//	if (2 * node + 1 < n)postOrder(v, 2 * node + 1, n);
-//	(*v).push_back(node);
-//}
+//	int lChild = myTree[root].lChild;
+//	int rChild = myTree[root].rChild;
 //
+//	if (lChild != -1)printPostOrder(lChild);
+//	if (rChild != -1)printPostOrder(rChild);
+//
+//	cout << root;
+//	postOrder.pop_back();
+//	if (!postOrder.empty())cout << " ";
+//}
 //
 //int main(void)
 //{
 //	int n;
 //	cin >> n;
+//	myTree.resize(n + 1);
 //
-//	int maxNode;
-//
-//	vector<int> tree;
-//	vector<int> pOrder, iOrder, poOrder;
-//	for (int i = 0;; ++i)
+//	stack<int> myStack;
+//	string op;
+//	int tmp;
+//	for (int i = 0; i < n * 2;++i)
 //	{
-//		if (pow(2, i) - 1>= n)
-//		{
-//			maxNode = pow(2, i);
-//			tree.resize(maxNode);
-//			preOrder(&pOrder, 1, maxNode);
-//			inOrder(&iOrder, 1, maxNode);
-//			postOrder(&poOrder, 1, maxNode);
-//			break;
-//		}
-//	}
+//		cin >> op;
 //
-//	//Get inOrder
-//	stack<int> s;
-//	string input;
-//	vector<int> inputVec, preVec;
-//	int num;
-//	for (int i = 0; i < n; ++i)
-//	{
-//		cin >> input;
-//		if (input == "Push")
+//		if (op == "Push")
 //		{
-//			cin >> num;
-//			s.push(num);
-//			preVec.push_back(num);
+//			cin >> tmp;
+//			myStack.push(tmp);
+//			preOrder.push_back(tmp);
 //		}
 //		else
 //		{
-//			inputVec.push_back(s.top());
-//			s.pop();
-//			--i;
-//		}
-//	}
-//	while (!s.empty())
-//	{
-//		cin >> input;
-//		inputVec.push_back(s.top());
-//		s.pop();
-//	}
-//	
-//	//Check
-//	int pivot;
-//	int cnt = 0, i;
-//	while (cnt < n)
-//	{
-//		pivot = -1;
-//
-//		i = preVec[cnt];
-//
-//		for (int j = 0; j < maxNode; ++j)
-//		{
-//			if (iOrder[j] == pOrder[cnt])
+//			if (!myStack.empty())
 //			{
-//				pivot = j;
-//				break;
+//				inOrder.push_back(myStack.top());
+//				myStack.pop();
 //			}
 //		}
-//
-//		if (pivot != -1)
-//		{
-//			if (i == inputVec[pivot])
-//			{
-//				for (int j = 0; j < maxNode; ++j)
-//				{
-//					if (poOrder[j] == pOrder[cnt])
-//					{
-//						tree[j] = i;
-//						break;
-//					}
-//				}
-//			}
-//		}
-//
-//		++cnt;
 //	}
 //
-//	for (int i = 0; i < maxNode; ++i)
-//	{
-//		if (tree[i] != 0)
-//		{
-//			cout << tree[i];
-//			--n;
-//			if (n > 0)cout << " ";
-//			else cout << endl;
-//		}
-//	}
+//	int root = buildTree(preOrder.begin(), inOrder.begin(), n);
+//	printPostOrder(root);
 //
 //	return 0;
 //}
 //
-////算啦算啦，完全不应该这么写，还是要老老实实构造树
-////0	答案正确	1	264	12 / 12
-////1	答案错误	1	308	0 / 4
-////2	答案错误	1	308	0 / 4
-////3	答案正确	1	308	1 / 1
-////4	答案错误	1	264	0 / 4
+////0	答案正确	1	308	12 / 12
+////1	答案正确	1	308	4 / 4
+////2	答案正确	1	180	4 / 4
+////3	答案正确	1	180	1 / 1
+////4	答案正确	1	180	4 / 4
