@@ -1,7 +1,6 @@
 //#include <iostream>
 //#include <vector>
 //#include <string>
-//#include <cmath>
 //#include <stack>
 //
 //using namespace std;
@@ -11,7 +10,6 @@
 //	int lChild;
 //	int rChild;
 //};
-//
 //vector<node> myTree;
 //vector<int> preOrder, inOrder, postOrder;
 //
@@ -32,23 +30,12 @@
 //
 //	myTree[root].lChild = buildTree(pre + 1, in, pivot);
 //	myTree[root].rChild = buildTree(pre + pivot + 1, in + pivot + 1, n - pivot - 1);
-//			
-//	return root;
-//}
 //
-//void printPostOrder(int root)
-//{
-//	postOrder.push_back(root);
-//
-//	int lChild = myTree[root].lChild;
-//	int rChild = myTree[root].rChild;
-//
-//	if (lChild != -1)printPostOrder(lChild);
-//	if (rChild != -1)printPostOrder(rChild);
-//
+//	//原本写了专门的打印函数，现在发现直接输出就可以了
 //	cout << root;
-//	postOrder.pop_back();
-//	if (!postOrder.empty())cout << " ";
+//	if (root != preOrder[0])cout << " ";
+//
+//	return root;
 //}
 //
 //int main(void)
@@ -80,8 +67,7 @@
 //		}
 //	}
 //
-//	int root = buildTree(preOrder.begin(), inOrder.begin(), n);
-//	printPostOrder(root);
+//	buildTree(preOrder.begin(), inOrder.begin(), n);
 //
 //	return 0;
 //}

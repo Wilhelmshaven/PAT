@@ -1,97 +1,95 @@
-//#include <stdio.h>
-////#include <memory.h>
-//#include <stdlib.h>
+////#include <stdio.h>
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <algorithm>
+//
+//using namespace std;
 //
 //typedef struct PATScore
 //{
-//	long long regNum;      //注册号
+//	string regNum;         //注册号
 //	int finalRank;         //最终排名
 //	int locNum;            //场编号
 //	int locRank;           //场排名
 //	int score;             //分数
 //};
 //
-//int cmp(const void *a, const void *b)
+//bool cmpLoc(const PATScore a, const PATScore b)
 //{
-//	PATScore *c = (PATScore *)a;
-//	PATScore *d = (PATScore *)b;
+//	if (a.locNum != b.locNum)return a.locNum < b.locNum;
+//	else if (a.score != b.score)return b.score < a.score;
+//	else return a.regNum < b.regNum;
+//}
 //
-//	if (c->score != d->score)return d->score - c->score;
-//	else return c->regNum - d->regNum;
+//bool cmp(const PATScore a, const PATScore b)
+//{
+//	if (a.score != b.score)return b.score < a.score;
+//	else return a.regNum < b.regNum;
 //}
 //
 //int main()
 //{
-//	PATScore ps[300];
-//	static PATScore psFinal[30000];
+//	int n, k;
+//	cin >> n;
 //
-//	int n;
-//	scanf("%d", &n);
-//
-//	int stuCount = 0;  //学生计数，兼做指针
-//
-//	for (int i = 0; i < n; i++)
+//	vector<PATScore> ranking;
+//	PATScore input;
+//	for (int i = 0; i < n; ++i)
 //	{
-//		int k;
-//		scanf("%d", &k);
-//		//memset(ps, 0, sizeof(PATScore));
-//
-//		if (k > 0)
+//		cin >> k;
+//		input.locNum = i + 1;
+//		for (int j = 0; j < k; ++j)
 //		{
-//			//input
-//			for (int j = 0; j < k; j++)
-//			{
-//				scanf("%lld %d", &ps[j].regNum, &ps[j].score);
-//				ps[j].locNum = i + 1;          // Write location number
-//			}
-//
-//			//SORT
-//			qsort(ps, k, sizeof(PATScore), cmp);
-//
-//			//location RANK
-//			int rank = 1;
-//			ps[0].locRank = 1;
-//			psFinal[stuCount] = ps[0];
-//			++stuCount;
-//
-//			for (int j = 1; j < k; j++)
-//			{
-//				if (ps[j].score != ps[j - 1].score)
-//				{
-//					rank++;
-//					if (rank < j + 1)rank = j + 1;
-//				}
-//				ps[j].locRank = rank;
-//
-//				psFinal[stuCount] = ps[j];
-//				++stuCount;
-//			}
+//			cin >> input.regNum >> input.score;
+//			ranking.push_back(input);
 //		}
 //	}
 //
-//	qsort(psFinal, stuCount, sizeof(PATScore), cmp);   //优化：本来就场均有序，其实可以归并。另，一开始就可以合起来读然后分段sort
-//
-//	//PRINT
-//	printf("%d\n", stuCount);
-//	if (stuCount != 0)
+//	//先分场排序写名次
+//	sort(ranking.begin(), ranking.end(), cmpLoc);
+//	int rank = 1;
+//	int cnt = 1;
+//	ranking[0].locRank = 1;
+//	for (int i = 1; i < ranking.size(); ++i)
 //	{
-//		int rank = 1;
-//		psFinal[0].finalRank = 1;
-//		printf("%lld %d %d %d\n", psFinal[0].regNum, psFinal[0].finalRank, psFinal[0].locNum, psFinal[0].locRank);
-//
-//		for (int i = 1; i < stuCount; i++)
+//		if (ranking[i].locNum != ranking[i - 1].locNum)
 //		{
-//			if (psFinal[i].score != psFinal[i - 1].score)rank = i + 1;
-//			psFinal[i].finalRank = rank;
-//
-//			printf("%lld %d %d %d\n", psFinal[i].regNum, psFinal[i].finalRank, psFinal[i].locNum, psFinal[i].locRank);
+//			rank = 1; //换场，重新统计
+//			cnt = 1;
+//			ranking[i].locRank = 1;
 //		}
+//		else
+//		{
+//			++cnt;
+//			if (ranking[i].score != ranking[i - 1].score)rank = cnt;
+//			ranking[i].locRank = rank;
+//		}
+//	}
+//
+//
+//	sort(ranking.begin(), ranking.end(), cmp);
+//
+//	//写名次并输出
+//	cout << ranking.size() << endl;
+//	
+//	ranking[0].finalRank = 1;
+//	ranking[0].locRank = 1;
+//	cout << ranking[0].regNum << " " << ranking[0].finalRank << " " << ranking[0].locNum << " " << ranking[0].locRank << endl;
+//
+//	rank = 1;
+//	for (int i = 1; i < ranking.size(); ++i)
+//	{
+//		if (ranking[i].score != ranking[i - 1].score)rank = i + 1;
+//		ranking[i].finalRank = rank;
+//
+//		cout << ranking[i].regNum << " " << ranking[i].finalRank << " " << ranking[i].locNum << " " << ranking[i].locRank << endl;
 //	}
 //
 //	return 0;
 //}
 //
-////0	答案正确	1	364	13 / 13
-////1	答案错误	1	236	0 / 6
-////2	答案正确	1	244	3 / 3
-////3	答案错误	22	1720	0 / 3
+////0	答案正确	1	180	13 / 13
+////1	答案正确	1	308	6 / 6
+////2	答案正确	1	308	3 / 3
+////3	答案正确	138	3668	3 / 3

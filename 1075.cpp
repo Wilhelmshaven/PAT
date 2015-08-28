@@ -39,6 +39,7 @@
 //		user[i].userID = i;
 //		for (int j = 1; j < 6; ++j)user[i].score[j] = -1;
 //	}
+//	user[0].userID = 1;
 //
 //	int fullMark[6];
 //	for (int i = 1; i < k + 1; ++i)scanf("%d", &fullMark[i]);
