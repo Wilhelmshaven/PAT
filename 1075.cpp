@@ -15,15 +15,19 @@
 //	Profile c = *(Profile *)a;
 //	Profile d = *(Profile *)b;
 //
-//	if (c.totalScore == d.totalScore)
+//	if (c.isSubmit && d.isSubmit)
 //	{
-//		if (c.perfectProblem == d.perfectProblem)
+//		if (c.totalScore == d.totalScore)
 //		{
-//			return c.userID - d.userID;
+//			if (c.perfectProblem == d.perfectProblem)
+//			{
+//				return c.userID - d.userID;
+//			}
+//			else return d.perfectProblem - c.perfectProblem;
 //		}
-//		else return d.perfectProblem - c.perfectProblem;
+//		else return d.totalScore - c.totalScore;
 //	}
-//	else return d.totalScore - c.totalScore;
+//	else return d.isSubmit - c.isSubmit;
 //}
 //
 //int main()
@@ -39,7 +43,6 @@
 //		user[i].userID = i;
 //		for (int j = 1; j < 6; ++j)user[i].score[j] = -1;
 //	}
-//	user[0].userID = 1;
 //
 //	int fullMark[6];
 //	for (int i = 1; i < k + 1; ++i)scanf("%d", &fullMark[i]);
@@ -50,11 +53,8 @@
 //		scanf("%d%d%d", &id, &problem, &score);
 //
 //		// Once submit, no more -1.
-//		if (user[id].score[problem] == -1)
-//		{
-//			user[id].score[problem] = 0;
-//			user[id].isSubmit = true;
-//		}
+//		if (user[id].score[problem] == -1)user[id].score[problem] = 0;
+//		if (score != -1)user[id].isSubmit = true;	
 //
 //		// Deal with input, record the score.
 //		if (user[id].score[problem] < score)
@@ -71,16 +71,18 @@
 //	qsort(user, n + 1, sizeof(Profile), cmp);
 //
 //	//Output & RANK
-//	int nowRank = 1;
-//
-//	printf("1 %05d %d", user[0].userID, user[0].totalScore);
-//	for (int j = 1; j <= k; ++j)
+//	if (user[0].isSubmit)
 //	{
-//		if (user[0].score[j] == -1)printf(" -");
-//		else printf(" %d", user[0].score[j]);
+//		printf("1 %05d %d", user[0].userID, user[0].totalScore);
+//		for (int j = 1; j <= k; ++j)
+//		{
+//			if (user[0].score[j] == -1)printf(" -");
+//			else printf(" %d", user[0].score[j]);
+//		}
+//		printf("\n");
 //	}
-//	printf("\n");
 //
+//	int nowRank = 1;
 //	for (int i = 1; i < n; ++i)
 //	{
 //		if (user[i].isSubmit == false)continue;
@@ -102,6 +104,6 @@
 //
 ////0	答案正确	1	564	13 / 13
 ////1	答案正确	1	692	3 / 3
-////2	答案错误	1	692	0 / 3
+////2	答案正确	1	692	3 / 3
 ////3	答案正确	2	692	3 / 3
-////4	答案错误	29	916	0 / 3
+////4	答案正确	29	916	3 / 3
