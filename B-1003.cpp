@@ -1,80 +1,66 @@
-//#include <stdio.h>
+//#include <iostream>
+//#include <string>
 //
-//int main(){
+//using namespace std;
+//
+//int main(void)
+//{
 //	int n;
-//	scanf("%d",&n);
-//	int i,j;
-//	char p,t;
-//	int flag1,flag2;
-//	//char a[100],b[100],c[100];
-//	int ax,bx,cx,ansflag,answer;
-//	getchar();
-//	for(i=1;i<=n;i++){
-//		ansflag=1;
-//		ax=0;
-//		bx=0;
-//		cx=0;
-//		flag1=0;
-//		flag2=0;
-//		for(j=1;j<=100;j++){
-//			scanf("%c",&p);
-//			if(p=='\n')break;
-//			if(j==100&&p!='\n')getchar();
-//			if(p!='P'&&p!='A'&&p!='T'){
-//				answer=0;
-//				ansflag=0;
-//				//break;
-//			}
+//	cin >> n;
 //
-//			if(p=='P'&&flag1!=0){
-//				answer=0;
-//				ansflag=0;
-//				//break;
-//			}
-//			if(p=='T'&&flag2!=0){
-//				answer=0;
-//				ansflag=0;
-//				//break;
-//			}
+//	string input;
+//	int size;
+//	for (int i = 0; i < n; ++i)
+//	{
+//		cin >> input;
+//		size = input.size();
 //
-//			if(p=='P'&&flag1==0)flag1=j;
-//			if(p=='T'&&flag2==0)flag2=j;
+//		//扫描输入
+//		bool pFlag = false, tFlag = false, error = false;
+//		int pPivot = 0, tPivot = 0;
+//		for (int j = 0; j < size; ++j)
+//		{
+//			if (pFlag && input[j] == 'P')error = true;
+//			if (tFlag && input[j] == 'T')error = true;
 //
-//			if(p=='A'){
-//				if(flag1==0&&flag2==0){
-//					//a[ax]=p;
-//					ax++;
+//			if (input[j] != 'A')
+//			{
+//				if (input[j] == 'P')
+//				{
+//					pFlag = true;
+//					pPivot = j;
 //				}
-//				if(flag1!=0&&flag2==0){
-//					//b[bx]=p;
-//					bx++;
+//				else if (input[j] == 'T')
+//				{
+//					tFlag = true;
+//					tPivot = j;
 //				}
-//				if(flag1!=0&&flag2!=0){
-//					//c[cx]=p;
-//					cx++;
-//				}
+//				else error = true;
 //			}
-//		}
-//		//Judge
-//		if(ansflag==1){
-//			if(bx==1){
-//				if(ax==0&&cx==0)answer=1;
-//				else if(ax==cx)answer=1;
-//				else if(cx==2*ax)answer=1;
-//				else answer=0;
-//			}else if(bx==2){
-//				if(ax==0&&cx==0)answer=1;
-//				//else if(ax==cx)answer=1;
-//				else if(cx==2*ax)answer=1;
-//				else answer=0;
-//			}else answer=0;
-//			if(flag1==0||flag2==0)answer=0;
-//			if(bx>2&&cx==bx*ax)answer=1;
+//			
+//			if (error)break;
 //		}
 //
-//		if(answer==1)printf("YES\n");
-//		else printf("NO\n");
+//		// 公式：对于第一条，有t-p=1；对于第二条，有t-p=1且size-t=p；
+//		// 对于第三条，可以由b的长度计算出迭代次数（b-1），然后有size-c-a=a*(b-1)，即c=a*b且b>0
+//		int a = pPivot;
+//		int b = tPivot - pPivot - 1;
+//		int c = size - tPivot - 1;
+//		
+//		error = true;
+//		if (b == 1 && a == c)error = false;
+//		if (a*b == c && b > 0)error = false;
+//
+//		if (!error) cout << "YES" << endl;
+//		else cout << "NO" << endl; 
 //	}
-//	scanf("%d",&i);
+//
 //	return 0;
 //}
+//
+////0	答案正确	1	176	11 / 11
+////1	答案正确	1	308	2 / 2
+////2	答案正确	1	180	2 / 2
+////3	答案正确	1	308	2 / 2
+////4	答案正确	1	308	2 / 2
+////5	答案正确	1	256	1 / 1
