@@ -1,131 +1,51 @@
-//#include <iostream>
-//#include <string>
-//#include <queue>
+//#include <stdio.h>
+//#include <vector>
+//#include <algorithm>
 //
 //using namespace std;
-//
-//typedef struct cmp
-//{
-//	bool operator()(const string &a, const string &b)
-//	{
-//		return b < a;
-//	}
-//};
 //
 //int main(void)
 //{
-//	vector<priority_queue<string, vector<string>, cmp>> myQueue;
-//	
-//	int n, k;
-//	cin >> n >> k;
-//	if (n>0)myQueue.resize(n + 1);
-//	else
-//	{
-//		for (int i = 1; i <= k; ++i)cout << i << " 0" << endl;
-//		return 0;
-//	}
+//	int n, k, c, index;
+//	scanf("%d %d\n", &n, &k);
 //
-//	string name;
-//	int c;
-//	int classNum;
+//	vector<vector<int>> myList(k + 1);
+//
+//	char name[5];
 //	for (int i = 0; i < n; ++i)
 //	{
-//		cin >> name >> c;
+//		scanf("%s %d", &name, &c);
 //		for (int j = 0; j < c; ++j)
 //		{
-//			cin >> classNum;
-//			myQueue[classNum].push(name);
+//			scanf("%d", &index);
+//			myList[index].push_back((name[0] << 24) + (name[1] << 16) + (name[2] << 8) + name[3]);
 //		}
 //	}
 //
-//	for (int i = 1; i <= n; ++i)
+//	size_t size = k + 1, sSize;
+//
+//	for (size_t i = 1; i < size; ++i)
 //	{
-//		if (!myQueue[i].empty())
+//		sSize = myList[i].size();
+//		printf("%d %d\n", i, sSize);
+//
+//		sort(myList[i].begin(), myList[i].end());
+//
+//		for (size_t j = 0; j < sSize;++j)
 //		{
-//			cout << i << " " << myQueue[i].size() << endl;
-//			while (!myQueue[i].empty())
-//			{
-//				cout << myQueue[i].top() << endl;
-//				myQueue[i].pop();
-//			}
+//			name[0] = myList[i][j] >> 24;
+//			name[1] = myList[i][j] >> 16;
+//			name[2] = myList[i][j] >> 8;
+//			name[3] = myList[i][j];
+//			printf("%s\n", name);
 //		}
-//		//else cout << i << " 0" << endl;
 //	}
 //
 //	return 0;
 //}
-
-
-
-
-
-//#include <iostream>
-//#include <string>
-//#include <algorithm>
-//#include <vector>
 //
-//using namespace std;
-//
-//string nameIndex[175760];
-//
-//void print(int s)
-//{
-//	cout << nameIndex[s] << endl;
-//};
-//
-//bool cmp(const int a, const int b)
-//{
-//	return a < b;
-//};
-//
-//int main()
-//{
-//	int n, k;
-//	cin >> n >> k;
-//
-//	string name;
-//	int c, classNum;
-//
-//	vector<int> stuClassList[2501];
-//
-//	// Stu input
-//	int temp;
-//	for (int i = 0; i < n; ++i)
-//	{
-//		// Class input
-//		cin >> name >> c;
-//
-//		temp = (name[0] - 65) * 26 * 26 + (name[1] - 65) * 26 + (name[2] - 65)
-//			+ (name[3] - 48);
-//		nameIndex[temp] = name;
-//
-//		for (int j = 0; j < c; ++j)
-//		{
-//			cin >> classNum;			
-//			stuClassList[classNum].push_back(temp);
-//		}
-//	}
-//
-//	for (int i = 1; i <= k; ++i)
-//	{
-//		size_t len = stuClassList[i].size();
-//
-//		cout << i << " " << len << endl;
-//
-//		// Sort student list for each class
-//		sort(stuClassList[i].begin(), stuClassList[i].end(), cmp);
-//
-//		// Then print student list		
-//		for (size_t j = 0; j < len; ++j)
-//		{
-//			cout << nameIndex[stuClassList[i][j]] << endl;
-//		}
-//	}
-//	
-//	return 0;
-//}
-//
+////倒排索引、内存压缩
 ////0	答案正确	1	308	15 / 15
-////1	答案正确	1	308	3 / 3
-////2	答案正确	1	308	3 / 3
-////3	运行超时			0 / 4
+////1	答案正确	1	256	3 / 3
+////2	答案正确	1	268	3 / 3
+////3	答案正确	140	9780	4 / 4
