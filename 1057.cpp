@@ -1,6 +1,8 @@
 //#include <iostream>
 //#include <string>
 //#include <vector>
+//#include <stack>
+//#include <set>
 //#include <algorithm>
 //
 //using namespace std;
@@ -10,108 +12,113 @@
 //	int n;
 //	cin >> n;
 //
-//	string cmd;
-//	vector<int> stack;
-//	vector<int> sortList;
-//	vector<int>::iterator iter;
-//	int value, pivot;
+//	stack<int> myStack;
+//	set<int> moreSet, lessSet;
 //
+//	string op;
+//	int num, median = -1;
+//	set<int>::iterator iter;
 //	for (int i = 0; i < n; ++i)
 //	{
-//		cin >> cmd;
+//		cin >> op;
 //
-//		if (cmd == "Pop")
+//		if (op == "Pop")
 //		{
-//			if (stack.size() == 0)cout << "Invalid" << endl;
+//			if (myStack.empty())cout << "Invalid" << endl;
 //			else
 //			{
-//				value = stack.back();
-//				cout << value << endl;
-//				stack.pop_back();
+//				num = myStack.top();
+//				cout << num << endl;
+//				myStack.pop();
 //
-//				// Deal with sorted list
-//				iter = find(sortList.begin(), sortList.end(), value);
-//				sortList.erase(iter);
+//				if (!myStack.empty())
+//				{
+//					if (num == median)
+//					{
+//						median = -1;
+//						int a, b;
+//						a = moreSet.size();
+//						b = lessSet.size();
+//						if (a>b)
+//						{
+//							iter = moreSet.begin();
+//							median = *iter;
+//							moreSet.erase(iter);
+//						}
+//						else
+//						{
+//							iter = lessSet.end();
+//							median = *(--iter);
+//							lessSet.erase(iter);
+//						}
+//					}
+//					else
+//					{
+//						iter = moreSet.find(num);
+//						if (iter != moreSet.end())
+//						{
+//							moreSet.erase(iter);
+//						}
+//						else
+//						{
+//							iter = lessSet.find(num);
+//							lessSet.erase(iter);
+//						}
+//					}
+//				}
 //			}
 //			continue;
 //		}
 //
-//		// the median value is defined to be the (N/2)-th smallest element if N is even, or ((N+1)/2)-th if N is odd.
-//		if (cmd == "PeekMedian")
+//		if (op == "PeekMedian")
 //		{
-//			pivot = stack.size();
-//			if (pivot == 0)cout << "Invalid" << endl;
-//			else
-//			{
-//				pivot = (pivot - 1) / 2;
-//
-//				// Get the value from the sorted list
-//				cout << sortList[pivot] << endl;
-//			}
+//			if(!myStack.empty())cout << median << endl;
+//			else cout << "Invalid" << endl;
 //			continue;
 //		}
-//
-//		if (cmd == "Push")
+//		
+//		if (op == "Push")
 //		{
-//			cin >> value;
-//			stack.push_back(value);
+//			scanf("%d", &num);
+//			myStack.push(num);
 //
-//			// Also insert in the sorted list
-//			pivot = sortList.size();
-//			if (pivot == 0)
+//			if (median == -1)
 //			{
-//				sortList.push_back(value);
+//				median = num;
 //				continue;
 //			}
-//			
-//			pivot = (pivot + 1) / 2;
-//			int begin = 0, end = sortList.size();
-//			while (1)
-//			{							
-//				if (sortList[pivot] >= value)
-//				{
-//					begin = pivot + 1;
-//					pivot = (end - pivot) / 2;
-//				}
-//				else
-//				{
-//					end = pivot;
-//					pivot = pivot / 2;
-//				}
 //
-//				if (pivot == sortList.size() || pivot == 0)
-//				{
-//					iter = sortList.begin() + pivot;
-//					sortList.insert(iter, value);
-//					break;
-//				}
-//
-//				if (sortList[pivot] <= value && sortList[pivot + 1] >= value)
-//				{
-//					iter = sortList.begin() + pivot;
-//					sortList.insert(iter, value);
-//					break;
-//				}
-//				//这里现在是顺序查找，改成二分什么的应该就不超时了
-//				//if (sortList[pivot - 1] <= value)
-//				//{
-//				//	iter = sortList.begin() + pivot;
-//				//	sortList.insert(iter, value);
-//				//	break;
-//				//}
-//				//else
-//				//{
-//				//	--pivot;
-//				//}
-//
-//				//if (pivot < 1)
-//				//{
-//				//	iter = sortList.begin();
-//				//	sortList.insert(iter, value);
-//				//	break;
-//				//}
+//			if (num > median)
+//			{
+//				moreSet.insert(num);
 //			}
-//			
+//			else
+//			{
+//				lessSet.insert(num);
+//			}
+//
+//			//Adjust
+//			int a, b;
+//			a = moreSet.size();
+//			b = lessSet.size();
+//			if (a-b > 1)
+//			{
+//				lessSet.insert(median);
+//
+//				iter = moreSet.begin();
+//				median = *iter;
+//				moreSet.erase(iter);
+//			}
+//			if (b-a > 0)
+//			{
+//				moreSet.insert(median);
+//
+//				iter = lessSet.end();
+//				median = *(--iter);
+//				lessSet.erase(iter);
+//			}
+//
+//			continue;
 //		}
 //	}
 //
@@ -121,5 +128,5 @@
 ////0	答案正确	1	180	15 / 15
 ////1	运行超时			0 / 5
 ////2	运行超时			0 / 5
-////3	运行超时			0 / 3
-////4	答案错误	1	256	0 / 2
+////3	异常退出	71	1844	0 / 3
+////4	异常退出	1	304	0 / 2

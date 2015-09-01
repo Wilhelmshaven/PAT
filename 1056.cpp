@@ -1,6 +1,5 @@
 //#include <stdio.h>
 //#include <vector>
-//#include <queue>
 //
 //using namespace std;
 //
@@ -9,87 +8,53 @@
 //	int np, ng;
 //	scanf("%d%d", &np, &ng);
 //
-//	vector<int> weight;
-//	int w;
-//	for (int i = 0; i < np; ++i)
-//	{
-//		scanf("%d", &w);
-//		weight.push_back(w);
-//	}
+//	vector<int> weight(np), rank(np), group(np), tmp;
+//	for (int i = 0; i < np; ++i)scanf("%d", &weight[i]);
+//	for (int i = 0; i < np; ++i)scanf("%d", &group[i]);
 //
-//	queue<int> group;
-//	for (int i = 0; i < np; ++i)
+//	//题目保证了Ng>1，否则就没办法归并组队了
+//	int pivot, size = group.size(), max, maxPivot, nowRank, playerNum;
+//	while (size > 1)
 //	{
-//		scanf("%d", &w);
-//		group.push(w);
-//	}
+//		tmp.clear();
+//		pivot = max = 0;
 //
-//	queue<int> *Pointer, tempQueue;
-//	int count, rank, front, max;
-//	while (1)
-//	{
-//		max = group.front();
-//		if (np == 1)
+//		nowRank = size / ng + 1;
+//		if (size%ng != 0)++nowRank;
+//
+//		while (pivot < size)
 //		{
-//			weight[max] = 1;
-//			break;
-//		}
+//			playerNum = group[pivot];
+//			rank[playerNum] = nowRank;     //写本场名次
 //
-//		count = np;
-//		rank = (np + ng) / ng + 1;
-//
-//		while (count > ng)
-//		{
-//			max = group.front();
-//			group.pop();
-//
-//			for (int i = 1; i < ng; i++)
+//			if (weight[playerNum]>max)
 //			{
-//				front = group.front();
-//				group.pop();
-//				if (weight[max] < weight[front])
-//				{
-//					weight[max] = rank;
-//					max = front;
-//				}
-//				else weight[front] = rank;
+//				max = weight[playerNum];
+//				maxPivot = playerNum;
 //			}
-//			count = count - ng;
-//			group.push(max);
-//		}
 //
-//		max = group.front();
-//		group.pop();
-//		for (int i = 1; i < count; i++)
-//		{
-//			front = group.front();
-//			group.pop();
-//			if (weight[max] < weight[front])
+//			++pivot;
+//
+//			if (pivot % ng == 0 || pivot == size)            //每N个数复位并推入最大结果
 //			{
-//				weight[max] = rank;
-//				max = front;
+//				max = 0;
+//				tmp.push_back(maxPivot);
 //			}
-//			else weight[front] = rank;
 //		}
-//		group.push(max);
-//
-//		if (np % ng == 0)np = np / ng;
-//		else np = np / ng + 1;
+//		group = tmp;
+//		size = group.size();
 //	}
+//	rank[group[0]] = 1;
 //
-//	int pivot = 0;
-//	for (int pivot = 0; pivot < weight.size() - 1; ++pivot)
-//	{
-//		printf("%d ", weight[pivot]);
-//	}
-//	printf("%d", weight[pivot]);
+//	printf("%d", rank[0]);
+//	for (int i = 1; i < np; ++i)printf(" %d", rank[i]);
 //
 //	return 0;
 //}
 //
 ////0	答案正确	1	256	13 / 13
-////1	答案错误	1	308	0 / 3
-////2	异常退出	1	248	0 / 2
+////1	答案正确	1	180	3 / 3
+////2	答案正确	1	252	2 / 2
 ////3	答案正确	1	308	3 / 3
-////4	答案正确	1	256	2 / 2
-////5	答案错误	1	180	0 / 2
+////4	答案正确	1	180	2 / 2
+////5	答案正确	1	180	2 / 2
