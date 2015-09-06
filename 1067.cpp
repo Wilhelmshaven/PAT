@@ -3,58 +3,47 @@
 //
 //using namespace std;
 //
-//int myFind(vector<int> v, int k,int n)
+////每次跑一个环，只标记不交换
+//int runCycle(vector<int> &seq, vector<int> &mark, int m)
 //{
-//	for (int i = k; i < n; ++i)
+//	int cnt = 0;
+//	while (!mark[m])
 //	{
-//		if (v[i] != i)return i;
+//		mark[m] = 1;
+//		++cnt;
+//		m = seq[m];
 //	}
-//	return 0;
+//	return cnt;
 //}
 //
-//int main()
+//int main(void)
 //{
 //	int n;
 //	scanf("%d", &n);
 //
-//	vector<int> seq;
-//	int tmp;
+//	vector<int> seq(n), mark(n);
+//	for (int i = 0; i < n; ++i)scanf("%d", &seq[i]);
+//		
+//	int cnt = 0, times;
 //	for (int i = 0; i < n; ++i)
 //	{
-//		scanf("%d", &tmp);
-//		seq.push_back(tmp);
+//		times = runCycle(seq, mark, i);
+//		if (times > 1)cnt += times + 1;
 //	}
 //
-//	int cnt = 0;
-//	size_t size = seq.size();
-//
-//	int flag = myFind(seq, 1, n);
-//	while (flag)
-//	{
-//		if (seq[0] == 0)
-//		{
-//			seq[0] = seq[flag];
-//			seq[flag] = 0;
-//			++cnt;
-//		}
-//
-//		while (seq[0] != 0)
-//		{
-//			swap(seq[0], seq[seq[0]]);
-//			++cnt;
-//		}
-//
-//		flag = myFind(seq, flag, n);
-//	}
+//	if (seq[0] != 0)cnt -= 2;
 //
 //	printf("%d", cnt);
 //
 //	return 0;
 //}
 //
-////0	答案正确	1	252	15 / 15
-////1	运行超时			0 / 3
-////2	运行超时			0 / 3
+//
+////参考：https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp
+////原先有两个点超时，其实既然只要次数，那为什么还要交换呢，模拟交换就好了，标记法嘛
+////0	答案正确	1	308	15 / 15
+////1	答案正确	11	1076	3 / 3
+////2	答案正确	6	564	3 / 3
 ////3	答案正确	1	308	2 / 2
-////4	答案正确	1	256	1 / 1
-////5	答案正确	1	180	1 / 1
+////4	答案正确	1	180	1 / 1
+////5	答案正确	1	308	1 / 1

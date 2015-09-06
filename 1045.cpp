@@ -1,5 +1,4 @@
 //#include <iostream>
-//#include <queue>
 //#include <vector>
 //
 //using namespace std;
@@ -13,25 +12,18 @@
 //int main(void)
 //{
 //	int n, m, tmp, container = 0, pivot;
-//	vector<int> favColor;
-//	vector<originColor> oriColor;
-//
-//	cin >> n;	
-//
-//	cin >> m;
-//	for (int i = 0; i < m; ++i)
-//	{
-//		cin >> tmp;
-//		favColor.push_back(tmp);
-//	}
 //	
-//	originColor input;
+//	cin >> n >> m;
+//	vector<int> favColor(m);
+//	for (int i = 0; i < m; ++i)cin >> favColor[i];
+//	
 //	//输入并紧缩原始颜色串
 //	cin >> m;
+//	vector<originColor> oriColor;
+//	originColor input;
 //	for (int i = 0; i < m; ++i)
 //	{
 //		cin >> tmp;
-//
 //		if (tmp <= n)
 //		{
 //			if (tmp == container)++oriColor[pivot].length;
@@ -45,17 +37,40 @@
 //		}
 //	}
 //
-//	//开始寻找最长串
-//	//动态规划，每次都为以该点起的最长紫串，再检查是否在题目要求的规定子串内
-//	vector<int> max;
-//	max.resize(oriColor.size());
-//	mark.resize(oriColor.size());
+//	//开始寻找最长串，动态规划
+//	int maxWeight, result = 0;
+//	size_t size = oriColor.size();
+//	size_t favSize = favColor.size();
 //
-//	for (int i = 0; i < favColor.size(); ++i)
-//	{
+//	vector<vector<int>> max(size + 1);
+//	for (size_t i = 0; i < size + 1; ++i)max[i].resize(favSize + 1);
 //
+//	//以原始颜色串为行，最喜欢颜色串为列，构造一个矩阵
+//	//矩阵值的意义为：以当前原始颜色串该颜色为结尾、以当前子列为指定颜色顺序的最长子串长度
+//	for (size_t i = 1; i <= favSize; ++i)
+//	{		
+//		for (size_t j = 1; j <= size; ++j)
+//		{
+//			//左，左上，上，找最大
+//			maxWeight = max[j - 1][i - 1];
+//			if (maxWeight < max[j][i - 1])maxWeight = max[j][i - 1];
+//			if (maxWeight < max[j - 1][i])maxWeight = max[j - 1][i];
+//
+//			//如果正好是当前元素，加上权值
+//			if (oriColor[j - 1].color == favColor[i - 1])maxWeight += oriColor[j - 1].length;
+//
+//			max[j][i] = maxWeight;
+//			if (maxWeight > result)result = maxWeight;     //统计最大
+//		}
 //	}
 //
+//	cout << result;
 //
 //	return 0;
 //}
+//
+////0	答案正确	1	180	15 / 15
+////1	答案正确	1	308	3 / 3
+////2	答案正确	1	180	6 / 6
+////3	答案正确	18	8628	3 / 3
+////4	答案正确	18	8500	3 / 3
