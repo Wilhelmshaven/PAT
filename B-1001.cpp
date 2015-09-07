@@ -1,16 +1,24 @@
 //#include <stdio.h>
 //
-//int main(){
-//	int n;
+//int main()
+//{
+//	int n, cnt = 0;
 //	scanf("%d",&n);
-//	int i;
-//	int count=0;
-//	for(i=1;;i++){
-//		if(n==1)break;
-//		if(n%2==0)n=n/2;
-//		else n=(3*n+1)/2;
-//		count++;
+//
+//	while (n != 1)
+//	{
+//		if (n % 2 == 0)n = n / 2;
+//		else n = (3 * n + 1) / 2;
+//		++cnt;
 //	}
-//	printf("%d",count);
+//
+//	printf("%d", cnt);
+//
 //	return 0;
 //}
+
+////0	答案正确	1	180	9 / 9
+////1	答案正确	1	308	2 / 2
+////2	答案正确	1	256	2 / 2
+////3	答案正确	1	256	1 / 1
+////4	答案正确	1	180	1 / 1

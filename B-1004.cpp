@@ -1,85 +1,38 @@
-//#include <stdio.h>
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <algorithm>
 //
-//int main(){
+//using namespace std;
+//
+//typedef struct student
+//{
+//	string name;
+//	string subject;
+//	int score;
+//};
+//
+//bool cmp(const student &a, const student &b)
+//{
+//	return b.score < a.score;
+//}
+//
+//int main(void)
+//{
 //	int n;
-//	scanf("%d",&n);
-//	int i,j,x,y;
-//	int max=-1;
-//	int min=1000;
-//	int grade;
-//	char name[11];
-//	char rename1[11];
-//	char rename2[11];
-//	char cla[11];
-//	char recla1[11];
-//	char recla2[11];
-//	for(i=1;i<=n;i++){
-//		x=0;
-//		y=0;
-//		getchar();
-//		for(j=0;j<11;j++){
-//			name[j]=getchar();
-//			//scanf("%c",&name[j]);
-//			x++;
-//			if(name[j]==' ')break;
-//		}
-//		for(j=0;j<11;j++){
-//			cla[j]=getchar();
-//			//scanf("%c",&cla[j]);
-//			y++;
-//			if(cla[j]==' ')break;
-//		}
-//		scanf("%d",&grade);
-//		if(grade>max){
-//			max=grade;
-//			for(j=0;j<x;j++){
-//				rename1[j]=name[j];
-//			}
-//			for(j=0;j<y;j++){
-//				recla1[j]=cla[j];
-//			}
-//		}
-//		if(grade<min){
-//			min=grade;
-//			for(j=0;j<x;j++){
-//				rename2[j]=name[j];
-//			}
-//			for(j=0;j<y;j++){
-//				recla2[j]=cla[j];
-//			}
-//		}
+//	cin >> n;
 //
-//	}
+//	vector<student> myList(n);
+//	for (int i = 0; i < n; ++i)cin >> myList[i].name >> myList[i].subject >> myList[i].score;
 //
-//	for(i=0;;i++){
-//		if(rename1[i]!=' ')printf("%c",rename1[i]);
-//		else{
-//			printf(" ");
-//			break;
-//		}
-//	}
-//	for(i=0;;i++){
-//		if(recla1[i]!=' ')printf("%c",recla1[i]);
-//		else{
-//			printf("\n");
-//			break;
-//		}
-//	}
-//	for(i=0;;i++){
-//		if(rename2[i]!=' ')printf("%c",rename2[i]);
-//		else{
-//			printf(" ");
-//			break;
-//		}
-//	}
-//	for(i=0;;i++){
-//		if(recla2[i]!=' ')printf("%c",recla2[i]);
-//		else{
-//			printf("\n");
-//			break;
-//		}
-//	}
+//	sort(myList.begin(), myList.end(), cmp);
 //
-//	scanf("%d",&i);
+//	cout << myList[0].name << " " << myList[0].subject << endl;
+//	cout << myList[n - 1].name << " " << myList[n - 1].subject << endl;
+//
 //	return 0;
 //}
+//
+////0	答案正确	1	256	12 / 12
+////1	答案正确	1	308	2 / 2
+////2	答案正确	1	308	6 / 6
