@@ -27,6 +27,7 @@
 //		binary[pivot] = d;
 //  
 //		for (int j = 1; j <= n; ++j)GreyCode[j - 1] = binary[j - 1] ^ binary[j];   //异或
+//		cout << i << ":";
 //		for (int j = n - 1; j >= 0; --j)cout << GreyCode[j];                      //输出结果
 //		cout << endl;
 //	}
