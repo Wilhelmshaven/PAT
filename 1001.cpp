@@ -1,40 +1,58 @@
 //#include <stdio.h>
+//#include <stack>
 //
-//void output(int x){
-//	if(x<0)x=-x;
-//	if(x==0)printf("000");
-//	else if(x<10)printf("00%d",x);
-//	else if(x<100)printf("0%d",x);
-//	else printf("%d",x);
-//}
+//using namespace std;
 //
-//int main(){
-//	int m,n,sum;
-//	scanf("%d%d",&m,&n);
-//	sum=m+n;
-//	int a,b,c;
-//	a=sum%1000;
-//	b=(sum%1000000-a)/1000;
-//	c=(sum-b*1000-a)/1000000;
+//int main(void)
+//{
+//	int a, b;
+//	scanf("%d %d", &a, &b);
 //
-//	if(sum<0)printf("-");
-//	if(c<0)c=-c;
-//	if(b<0)b=-b;
-//	if(a<0)a=-a;
-//	if(c!=0){
+//	int sum = a + b;
 //
-//		printf("%d,",c);
-//		output(b);
-//		printf(",");
-//		output(a);
+//	//处理负号
+//	if (sum < 0)
+//	{
+//		printf("-");
+//		sum = -sum;
 //	}
-//	else if(b!=0){
-//		printf("%d",b);
-//		printf(",");
-//		output(a);
-//	}else printf("%d",a);
 //
-//	printf("%d%d%d",a,b,c);
-//	scanf("%d",&n);
+//	if (sum != 0)
+//	{
+//		int tmp = sum;
+//		stack<int> myStack;
+//
+//		//求取各位数字
+//		while (tmp != 0)
+//		{
+//			myStack.push(tmp % 10);
+//			tmp = tmp / 10;
+//		}
+//
+//		int cnt = myStack.size();
+//		
+//		while (cnt > 0)
+//		{
+//			printf("%d", myStack.top());
+//			myStack.pop();
+//			--cnt;
+//			if (cnt > 0 && cnt % 3 == 0)printf(",");   //若剩下的容量是3的倍数，打印逗号
+//		}
+//	}
+//	else printf("0\n");
+//	
 //	return 0;
 //}
+//
+//0	答案正确	1	308	9 / 9
+//1	答案正确	1	308	1 / 1
+//10	答案正确	1	308	1 / 1
+//11	答案正确	1	308	1 / 1
+//2	答案正确	1	308	1 / 1
+//3	答案正确	1	308	1 / 1
+//4	答案正确	1	308	1 / 1
+//5	答案正确	1	308	1 / 1
+//6	答案正确	1	308	1 / 1
+//7	答案正确	1	308	1 / 1
+//8	答案正确	1	308	1 / 1
+//9	答案正确	1	308	1 / 1
