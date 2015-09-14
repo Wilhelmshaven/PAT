@@ -1,67 +1,55 @@
 //#include <iostream>
 //#include <cmath>
 //#include <stack>
+//#include <vector>
 //
 //using namespace std;
 //
-//int prime[9593];
+//vector<int> prime;
+//int cnt = 0;
 //
-//void printPrime()
+//bool chkPrime(int n, int end)
 //{
-//	prime[0] = 2;
-//	prime[1] = 3;
-//
-//	int pivot = 2;
-//	bool flag = true;
-//	for (int i = 6; i < 100010; i = i + 6)
+//	size_t size = prime.size();
+//	for (size_t i = 2; i < size; ++i)
 //	{
-//		for (int j = 0; j < pivot; ++j)
-//		{
-//			flag = true;
-//			if ((i - 1) % prime[j] == 0)
-//			{
-//				flag = false;
-//				break;
-//			}
-//		}
-//		if (flag)
-//		{
-//			prime[pivot] = i - 1;
-//			++pivot;
-//		}
+//		if (prime[i] > end)break;
+//		if (n % prime[i] == 0)return false;
+//	}
+//	prime.push_back(n);
+//	return true;
+//}
 //
-//		for (int j = 0; j < pivot; ++j)
-//		{
-//			flag = true;
-//			if ((i + 1) % prime[j] == 0)
-//			{
-//				flag = false;
-//				break;
-//			}
-//		}
-//		if (flag)
-//		{
-//			prime[pivot] = i + 1;
-//			++pivot;
-//		}
+//void printPrime(int n)
+//{
+//	prime.push_back(2);
+//	prime.push_back(3);
+//	int end;
+//	for (int i = 6; i < n; i = i + 6)
+//	{
+//		end = sqrt(i + 1);
+//		chkPrime(i - 1, end);
+//		chkPrime(i + 1, end);
 //	}
 //}
 //
 //bool isPrime(int n)
 //{
-//	if (n == 1)return false;
+//	if (n < 2)return false;
 //
-//	for (int i = 0; i < 9593; ++i)
+//	size_t size = prime.size();
+//	int end = sqrt(n);
+//	for (size_t i = 0; i < size; ++i)
 //	{
-//		if (prime[i] >= n)break;
-//		if (n%prime[i] == 0)return false;
+//		if (prime[i] > end)break;
+//		if (n % prime[i] == 0)return false;
 //	}
 //	return true;
 //}
 //
 //int main()
 //{
-//	printPrime();
+//	printPrime(100000);
 //
 //	int n, radix, powCnt;
 //	stack<int> reverse;
@@ -84,7 +72,7 @@
 //			reverse.push(n%radix);
 //			n = n / radix;
 //		}
-//		
+//
 //		powCnt = 0;
 //		while (!reverse.empty())
 //		{
@@ -100,7 +88,7 @@
 //	return 0;
 //}
 //
-////0	答案正确	151	392	12 / 12
-////1	答案正确	151	316	2 / 2
-////2	答案正确	151	320	4 / 4
-////3	答案正确	151	312	2 / 2
+////0	答案正确	3	384	12 / 12
+////1	答案正确	4	308	2 / 2
+////2	答案正确	3	308	4 / 4
+////3	答案正确	3	308	2 / 2
